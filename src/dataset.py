@@ -14,7 +14,7 @@ def load_covid_dataset(data_dir: str):
 
     class_names.sort()
 
-    class_labels = {name : i for i, name in enumerate(class_names)}
+    class_labels = {name: i for i, name in enumerate(class_names)}
 
     res = []
 
@@ -24,7 +24,10 @@ def load_covid_dataset(data_dir: str):
         for current_folder, subfolders, filenames in os.walk(folder):
              for filename in filenames:
                   if filename.lower().endswith((".png", ".jpeg", ".jpg")):
-                       res.append({"image_path" : os.path.join(current_folder, filename), "label" : class_labels[name]})
+                       res.append({"image_path": os.path.join(current_folder, filename), "label" : class_labels[name]})
+
+    ds = Dataset.from_list(res)
+    
 
 if __name__ == "__main__":
      load_covid_dataset(DATA_DIR)
